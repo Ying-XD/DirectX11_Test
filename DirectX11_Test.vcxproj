@@ -155,38 +155,29 @@
     <ClInclude Include="baseShader.h" />
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="d3dclass.h" />
-    <ClInclude Include="DeferredShader.h" />
-    <ClInclude Include="depthshaderclass.h" />
     <ClInclude Include="FpsClass.h" />
     <ClInclude Include="fullscreenShader.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="graphicsclass.h" />
-    <ClInclude Include="ImportanceMapClass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="positionclass.h" />
     <ClInclude Include="rendertextureclass.h" />
-    <ClInclude Include="RTWDepthShader.h" />
-    <ClInclude Include="RTW_Shadow_Backward.h" />
     <ClInclude Include="shadowshaderclass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="timerclass.h" />
-    <ClInclude Include="WarpMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="baseShader.cpp" />
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
-    <ClCompile Include="DeferredShader.cpp" />
-    <ClCompile Include="depthshaderclass.cpp" />
     <ClCompile Include="FpsClass.cpp" />
     <ClCompile Include="fullscreenShader.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
-    <ClCompile Include="ImportanceMapClass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="lightclass.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -194,13 +185,10 @@
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="positionclass.cpp" />
     <ClCompile Include="rendertextureclass.cpp" />
-    <ClCompile Include="RTWDepthShader.cpp" />
-    <ClCompile Include="RTW_Shadow_Backward.cpp" />
     <ClCompile Include="shadowshaderclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="timerclass.cpp" />
-    <ClCompile Include="WarpMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\DeferredPS.hlsl">

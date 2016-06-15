@@ -24,9 +24,6 @@
     <ClInclude Include="d3dclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="depthshaderclass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="graphicsclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,9 +60,6 @@
     <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImportanceMapClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="baseShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -75,27 +69,12 @@
     <ClInclude Include="fullscreenShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WarpMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RTWDepthShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeferredShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RTW_Shadow_Backward.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="d3dclass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="depthshaderclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="graphicsclass.cpp">
@@ -134,9 +113,6 @@
     <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImportanceMapClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="baseShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -146,19 +122,7 @@
     <ClCompile Include="fullscreenShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WarpMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="global.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RTWDepthShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeferredShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RTW_Shadow_Backward.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
