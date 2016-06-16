@@ -1,31 +1,16 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: main.cpp
-////////////////////////////////////////////////////////////////////////////////
 #include "systemclass.h"
-//#include <xnamath.h>
-#include <DirectXMath.h>
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
-{
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow) {
 	SystemClass* System;
-	bool result;
-	// Create the system object.
+	
 	System = new SystemClass;
-	if(!System)
-	{
+	if (!System || !System->Initialize()) {
 		return 0;
 	}
 
-	// Initialize and run the system object.
-	result = System->Initialize();
-	if(result)
-	{
-		System->Run();
-	}
+	System->Run();
 
-	// Shutdown and release the system object.
-	System->Shutdown();
-	delete System;
-	System = 0;
+	SHUTDOWN_DELETE(System);
 
 	return 0;
 }

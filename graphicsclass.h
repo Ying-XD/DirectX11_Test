@@ -10,7 +10,7 @@
 #include "modelclass.h"
 #include "lightclass.h"
 #include "rendertextureclass.h"
-#include "shadowshaderclass.h"
+#include "ShaderClass.h"
 
 
 class GraphicsClass {
@@ -39,7 +39,7 @@ private:
 	ModelClass *m_CubeModel;
 	LightClass* m_Light;
 
-	ShadowShaderClass*	m_ShadowShader;
+	ShaderClass*	m_ShadowShader;
 	
 	KeysPressed m_keysPressed;
 	KeysPressed m_switch;

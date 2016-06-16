@@ -8,7 +8,7 @@ class FpsClass {
 public:
 	FpsClass();
 	~FpsClass();
-	void Initialize();
+	bool Initialize();
 	void Frame();
 	int GetFPS();
 private:

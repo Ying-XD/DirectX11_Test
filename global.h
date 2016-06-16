@@ -20,20 +20,13 @@
 #define LIGHTVIEW_NEAR		1.0f
 #define	LIGHTVIEW_FAR		100.0f
 
-const	FLOAT Shadow_Texel_Size	= 1.0f / SHADOWMAP_WIDTH;
-
 #define PI					(3.14159265f)
 
-//		Gaussian blur
-#define BLUR_FACTOR			0.75f
-#define BLUR_WIDTH			10
-
-//		global value in hlsl
-#define SN_BONUS			2.0f
-#define SHADOW_BIAS			0.0015f
 
 #define CHECK_HRESULT(hr)		if (FAILED(hr)) return false
 #define CHECK_RESULT(result)	if (!(result)) return false
+#define CHECK_RESULT_MSG(result, msg) \
+	if (!(result)) { Log::GetInstance()->LogMsg(msg); return false;}
 #define CHECK_POINT(ptr)		if (ptr == NULL) return false
 
 //	to release d3dx11 resource

@@ -9,10 +9,11 @@ FpsClass::FpsClass() {
 FpsClass::~FpsClass() {
 }
 
-void FpsClass::Initialize() {
+bool FpsClass::Initialize() {
 	m_fps = 0;
 	m_count = 0;
 	m_satrtTime = timeGetTime();
+	return true;
 }
 
 void FpsClass::Frame() {

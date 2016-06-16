@@ -11,7 +11,6 @@
 #include "inputclass.h"
 #include "graphicsclass.h"
 #include "timerclass.h"
-#include "positionclass.h"
 #include "FpsClass.h"
 #include "global.h"
 #include "Log.h"

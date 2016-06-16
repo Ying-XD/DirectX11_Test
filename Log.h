@@ -7,6 +7,7 @@ class Log {
 public:
 	Log();
 	~Log();
+	void LogMsg() {};
 	void LogMsg(const std::string &msg);
 	void LogMsgInt(int i);
 	void LogShaderErr(ID3D10Blob * errorMsg);

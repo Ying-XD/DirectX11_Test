@@ -1,7 +1,7 @@
-#include "shadowshaderclass.h"
+#include "ShaderClass.h"
 #include "baseShader.h"
 
-ShadowShaderClass::ShadowShaderClass() {
+ShaderClass::ShaderClass() {
 	m_vertexShader	= NULL;
 	m_pixelShader	= NULL;
 	m_layout		= NULL;
@@ -17,14 +17,14 @@ ShadowShaderClass::ShadowShaderClass() {
 }
 
 
-ShadowShaderClass::ShadowShaderClass(const ShadowShaderClass& other) {
+ShaderClass::ShaderClass(const ShaderClass& other) {
 }
 
 
-ShadowShaderClass::~ShadowShaderClass() {
+ShaderClass::~ShaderClass() {
 }
 
-bool ShadowShaderClass::Initialize(ID3D11Device* device, HWND hwnd) {
+bool ShaderClass::Initialize(ID3D11Device* device, HWND hwnd) {
 	BaseShader::CreateSampler(device, &m_sampleStateWrap, D3D11_TEXTURE_ADDRESS_WRAP);
 	BaseShader::CreateSampler(device, &m_sampleStateClamp, D3D11_TEXTURE_ADDRESS_CLAMP);
 	BaseShader::CreateSampler(device, &m_sampleStateBorder, D3D11_TEXTURE_ADDRESS_BORDER);
@@ -35,18 +35,18 @@ bool ShadowShaderClass::Initialize(ID3D11Device* device, HWND hwnd) {
 }
 
 
-void ShadowShaderClass::Shutdown() {
+void ShaderClass::Shutdown() {
 	ShutdownShader();
 }
 
-void ShadowShaderClass::SetLightParameters(D3DXVECTOR3 lightPosition, D3DXVECTOR4 ambientColor, D3DXVECTOR4 diffuseColor) {
+void ShaderClass::SetLightParameters(D3DXVECTOR3 lightPosition, D3DXVECTOR4 ambientColor, D3DXVECTOR4 diffuseColor) {
 	m_lightPos = lightPosition;
 	m_ambientColor = ambientColor;
 	m_diffuseColor = diffuseColor;
 }
 
 
-bool ShadowShaderClass::Render(ID3D11DeviceContext* context, int indexCount, 
+bool ShaderClass::Render(ID3D11DeviceContext* context, int indexCount, 
 							   D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, 
 							   D3DXMATRIX lightViewMatrix, D3DXMATRIX lightProjectionMatrix, 
 							   ID3D11ShaderResourceView* texture)
@@ -63,7 +63,7 @@ bool ShadowShaderClass::Render(ID3D11DeviceContext* context, int indexCount,
 	return true;
 }
 
-bool ShadowShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, WCHAR* psFilename) {
+bool ShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, WCHAR* psFilename) {
 	HRESULT hr;
 	ID3D10Blob* errorMsg = 0;
 	ID3D10Blob* vsBuffer = 0;
@@ -92,7 +92,7 @@ bool ShadowShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR*
 	return true;
 }
 
-void ShadowShaderClass::ShutdownShader(){
+void ShaderClass::ShutdownShader(){
 
 	SAFE_RELEASE(m_lightBuffer);
 	SAFE_RELEASE(m_lightBuffer2);
@@ -111,7 +111,7 @@ void ShadowShaderClass::ShutdownShader(){
 
 
 
-bool ShadowShaderClass::SetShaderParameters(ID3D11DeviceContext* context, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, D3DXMATRIX lightViewMatrix, D3DXMATRIX lightProjectionMatrix,
+bool ShaderClass::SetShaderParameters(ID3D11DeviceContext* context, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, D3DXMATRIX lightViewMatrix, D3DXMATRIX lightProjectionMatrix,
 											ID3D11ShaderResourceView* texture, 
 											D3DXVECTOR3 lightPosition, D3DXVECTOR4 ambientColor, D3DXVECTOR4 diffuseColor) {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -168,7 +168,7 @@ bool ShadowShaderClass::SetShaderParameters(ID3D11DeviceContext* context, D3DXMA
 }
 
 
-void ShadowShaderClass::RenderShader(ID3D11DeviceContext* context, int indexCount)
+void ShaderClass::RenderShader(ID3D11DeviceContext* context, int indexCount)
 {
 	context->IASetInputLayout(m_layout);
 

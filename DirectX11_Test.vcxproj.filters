@@ -16,6 +16,15 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{b4e89d7e-979a-4e00-b0ec-590dcc59fec3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="bw-assets-parser">
+      <UniqueIdentifier>{f3492d4e-a7e9-476b-a2d2-980f4f059c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bw-assets-parser\Header Files">
+      <UniqueIdentifier>{9c11cf21-bb4e-4a86-8012-3e26ef0df54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="bw-assets-parser\Source Files">
+      <UniqueIdentifier>{d5830ef5-a854-46df-a44a-a72b2e048021}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cameraclass.h">
@@ -36,13 +45,7 @@
     <ClInclude Include="modelclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="positionclass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rendertextureclass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="shadowshaderclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="systemclass.h">
@@ -69,6 +72,54 @@
     <ClInclude Include="fullscreenShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\anim_calc.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\array.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\binaryfile.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\indices.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\interpolated_anim.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\math3d.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\primitives.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\pugiconfig.hpp">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\pugixml.hpp">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\transform.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\vertexformats.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\vertices.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bw-assets-parser\visual.h">
+      <Filter>bw-assets-parser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -92,13 +143,7 @@
     <ClCompile Include="modelclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="positionclass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="rendertextureclass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shadowshaderclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="systemclass.cpp">
@@ -123,6 +168,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\anim_calc.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\indices.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\interpolated_anim.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\primitives.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\pugixml.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\vertices.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bw-assets-parser\visual.cpp">
+      <Filter>bw-assets-parser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

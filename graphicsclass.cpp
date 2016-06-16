@@ -34,16 +34,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	
 	// Create the Direct3D object.
 	m_D3D = new D3DClass;
-	if(!m_D3D) {
-		return false;
-	}
+	CHECK_RESULT_MSG(m_D3D && m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_FAR, SCREEN_NEAR) , "Could not initialize Direct3D.");
 
-	// Initialize the Direct3D object.
-	result = m_D3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_FAR, SCREEN_NEAR);
-	if(!result)	{
-		MessageBox(hwnd, L"Could not initialize Direct3D.", L"Error", MB_OK);
-		return false;
-	}
 	ID3D11Device* device = m_D3D->GetDevice();
 
 	// Create the camera object.
@@ -57,10 +49,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	
 	// Create the cube model object.
 	m_CubeModel = new ModelClass;
-	if (!m_CubeModel || !m_CubeModel->Initialize(device, "./data/cube.txt", L"./data/wall01.dds")) {
-		MessageBox(hwnd, L"Could not initialize the cube model object.", L"Error", MB_OK);
-		return false;
-	}
+	CHECK_RESULT_MSG(m_CubeModel && m_CubeModel->Initialize(device, "./data/cube.txt", L"./data/wall01.dds"), "Could not initialize the cube model object.");
 
 	m_CubeModel->SetPosition(0.0f, 1.0f, 0.0f);
 	
@@ -80,13 +69,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Light->SetLookAt(0.0f, 0.0f, 0.0f);
 	m_Light->GenerateProjectionMatrix(LIGHTVIEW_FAR, LIGHTVIEW_NEAR);
 
-	
 	// Create the shadow shader object.
-	m_ShadowShader = new ShadowShaderClass;
-	if(!m_ShadowShader || ! m_ShadowShader->Initialize(device, hwnd)) {
-		MessageBox(hwnd, L"Could not initialize the shadow shader object.", L"Error", MB_OK);
-		return false;
-	}
+	m_ShadowShader = new ShaderClass;
+	CHECK_RESULT_MSG(m_ShadowShader && m_ShadowShader->Initialize(device, hwnd), "Could not initialize the shadow shader object.");
 
 	return true;
 }
@@ -97,7 +82,6 @@ void GraphicsClass::Shutdown()
 
 	SHUTDOWN_SHADER(m_ShadowShader);
 
-	// Release model object
 	for each (auto model in m_sence) {
 		SHUTDOWN_MODEL(model);
 	}
@@ -211,7 +195,6 @@ bool GraphicsClass::conventionalShadowmap() {
 			return false;
 		}
 	}
-
 
 	m_D3D->EndScene();
 

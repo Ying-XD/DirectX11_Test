@@ -15,8 +15,7 @@ TextureClass::TextureClass(const TextureClass& other)
 }
 
 
-TextureClass::~TextureClass()
-{
+TextureClass::~TextureClass() {
 }
 
 

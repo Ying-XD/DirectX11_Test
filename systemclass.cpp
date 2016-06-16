@@ -30,10 +30,7 @@ SystemClass::~SystemClass()
 bool SystemClass::Initialize()
 {
 	int screenWidth, screenHeight;
-	bool result;
 
-
-	// Initialize the width and height of the screen to zero before sending the variables into the function.
 	screenWidth = 0;
 	screenHeight = 0;
 
@@ -42,149 +39,75 @@ bool SystemClass::Initialize()
 
 	// 创建 Input对象 读入用户的键盘和鼠标输入数据.
 	m_Input = new InputClass;
-	if(!m_Input)
-		return false;
-
-	// 初始化 Input Class
-	result = m_Input->Initialize(m_hinstance, m_hwnd, screenWidth, screenHeight);
-	if(!result) {
-		Log::GetInstance()->LogMsg("Could not initialize the input object.");
-		return false;
-	}
+	CHECK_RESULT_MSG((m_Input && m_Input->Initialize(m_hinstance, m_hwnd, screenWidth, screenHeight)), "Cant not initialize InputClass.");
 
 	// 创建 graphic 对象
 	// 这个对象会处理所有图形的渲染
 	m_Graphics = new GraphicsClass;
-	if(!m_Graphics)	{
-		Log::GetInstance()->LogMsg("Could not create the Graphic object.");
-		return false;
-	}
-
-	// 初始化 graphic 对象
-	result = m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd);
-	if(!result) {
-		Log::GetInstance()->LogMsg("Could not initialize the Graphic object.");
-		return false;
-	}
+	CHECK_RESULT_MSG(m_Graphics && m_Graphics->Initialize(screenWidth, screenHeight, m_hwnd), "Can not initialize GraphicsClass");
 	
 	m_Timer = new TimerClass;
-	if(!m_Timer) {
-		return false;
-	}
+	CHECK_RESULT_MSG(m_Timer && m_Timer->Initialize(), "Can not initialize TimerClass");
 
-	result = m_Timer->Initialize();
-	if(!result)	{
-		Log::GetInstance()->LogMsg("Could not initialize the timer object.");
-		return false;
-	}
-
-	//m_Position = new PositionClass;
-	//if(!m_Position) {
-	//	return false;
-	//}
-
-	// 设置position的初始值，这个值将被传送 camera
-	//m_Position->SetPosition(0.0f, 10.0f, -10.0f);
-
-	// set fps
 	m_Fps = new FpsClass;
-	if (!m_Fps) return false;
-	m_Fps->Initialize();
+	CHECK_RESULT_MSG(m_Fps && m_Fps->Initialize());
 
 	return true;
 }
 
 
-void SystemClass::Shutdown()
-{
-	// Release the position object.
-	//SAFE_DELETE(m_Position);
-	// Release the timer object.
+void SystemClass::Shutdown() {
 	SAFE_DELETE(m_Timer);
-	if(m_Timer)
-	{
-		delete m_Timer;
-		m_Timer = 0;
-	}
-
-	// Release the graphics object.
 	SHUTDOWN_DELETE(m_Graphics);
-	
+	SAFE_DELETE(m_Input);
+	SAFE_DELETE(m_Fps);
 
-	// Release the input object.
-	if(m_Input)
-	{
-		delete m_Input;
-		m_Input = 0;
-	}
-
-	// Shutdown the window.
 	ShutdownWindows();
-	
-	return;
 }
 
 
-void SystemClass::Run()
-{
+void SystemClass::Run() {
 	MSG msg = {};
 	
-	while(msg.message != WM_QUIT)
-	{
+	while(msg.message != WM_QUIT) {
 		// 处理窗口的信息.
-		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-		{
+		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 
 		if (!Frame())
 			break;
-		
 	}
 
 }
 
 
-bool SystemClass::Frame()
-{
-
-
+bool SystemClass::Frame() {
 	// 读取用户的输入数据.
 	CHECK_RESULT(m_Input->Frame());
 
-	KeysPressed keysPressed = m_Input->GetKeysPressed();
-	m_Graphics->SetKeysPressed(keysPressed);
+	m_Graphics->SetKeysPressed(m_Input->GetKeysPressed());
 
-	// Check if the user pressed escape and wants to exit the application.
 	if(m_Input->IsEscapePressed())
 		return false;
 
 	m_Timer->Frame();
 	m_Graphics->SetFrameTime(m_Timer->GetTime());
-
+	m_Fps->Frame();
 
 	CHECK_RESULT(m_Graphics->Frame());
 
-	m_Fps->Frame();
-
-
-	WCHAR titleBuf[64] = { 0 };
-	wsprintf(titleBuf, L"DirectX11_Test -  FPS: %d", m_Fps->GetFPS());
-
-	SetWindowText(m_hwnd, titleBuf);
 	return true;
 }
 
 
-LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam)
-{
+LRESULT CALLBACK SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 	return DefWindowProc(hwnd, umsg, wparam, lparam);
 }
 
 
-void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
-{
+void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight) {
 	WNDCLASSEX wc;
 	DEVMODE dmScreenSettings;
 	int posX, posY;
@@ -257,20 +180,12 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight)
 	ShowWindow(m_hwnd, SW_SHOW);
 	SetForegroundWindow(m_hwnd);
 	SetFocus(m_hwnd);
-
-	//ShowCursor(false);
-
-	return;
 }
 
-void SystemClass::ShutdownWindows()
-{
-	// Show the mouse cursor.
-	//ShowCursor(true);
+void SystemClass::ShutdownWindows() {
 
 	// Fix the display settings if leaving full screen mode.
-	if(FULL_SCREEN)
-	{
+	if(FULL_SCREEN) {
 		ChangeDisplaySettings(NULL, 0);
 	}
 
@@ -288,28 +203,19 @@ void SystemClass::ShutdownWindows()
 }
 
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
+LRESULT CALLBACK WndProc(HWND hWnd, UINT umessage, WPARAM wParam, LPARAM lParam)
 {
-	switch(umessage)
-	{
-		// Check if the window is being destroyed.
-		case WM_DESTROY:
-		{
-			PostQuitMessage(0);
-			return 0;
-		}
-
-		// Check if the window is being closed.
-		case WM_CLOSE:
-		{
+	switch(umessage) {
+		// Check if the window is being destroyed or closed.
+		case WM_DESTROY: 
+		case WM_CLOSE: 	{
 			PostQuitMessage(0);		
 			return 0;
 		}
 
 		// All other messages pass to the message handler in the system class.
-		default:
-		{
-			return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+		default: {
+			return ApplicationHandle->MessageHandler(hWnd, umessage, wParam, lParam);
 		}
 	}
 }

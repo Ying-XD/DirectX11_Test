@@ -8,7 +8,7 @@
 #include "baseShader.h"
 
 
-class ShadowShaderClass {
+class ShaderClass {
 private:
 	struct MatrixBufferType
 	{
@@ -32,9 +32,9 @@ private:
 	};
 	
 public:
-	ShadowShaderClass();
-	ShadowShaderClass(const ShadowShaderClass&);
-	~ShadowShaderClass();
+	ShaderClass();
+	ShaderClass(const ShaderClass&);
+	~ShaderClass();
 
 	bool Initialize(ID3D11Device*, HWND);
 	void Shutdown();

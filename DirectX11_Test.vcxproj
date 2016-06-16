@@ -153,6 +153,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="baseShader.h" />
+    <ClInclude Include="BoneNode.h" />
+    <ClInclude Include="bw-assets-parser\anim_calc.h" />
+    <ClInclude Include="bw-assets-parser\array.h" />
+    <ClInclude Include="bw-assets-parser\binaryfile.h" />
+    <ClInclude Include="bw-assets-parser\indices.h" />
+    <ClInclude Include="bw-assets-parser\interpolated_anim.h" />
+    <ClInclude Include="bw-assets-parser\math3d.h" />
+    <ClInclude Include="bw-assets-parser\primitives.h" />
+    <ClInclude Include="bw-assets-parser\pugiconfig.hpp" />
+    <ClInclude Include="bw-assets-parser\pugixml.hpp" />
+    <ClInclude Include="bw-assets-parser\transform.h" />
+    <ClInclude Include="bw-assets-parser\vertexformats.h" />
+    <ClInclude Include="bw-assets-parser\vertices.h" />
+    <ClInclude Include="bw-assets-parser\visual.h" />
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="FpsClass.h" />
@@ -163,15 +177,23 @@
     <ClInclude Include="lightclass.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="modelclass.h" />
-    <ClInclude Include="positionclass.h" />
+    <ClInclude Include="parser_header.h" />
     <ClInclude Include="rendertextureclass.h" />
-    <ClInclude Include="shadowshaderclass.h" />
+    <ClInclude Include="ShaderClass.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="textureclass.h" />
     <ClInclude Include="timerclass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="baseShader.cpp" />
+    <ClCompile Include="BoneNode.cpp" />
+    <ClCompile Include="bw-assets-parser\anim_calc.cpp" />
+    <ClCompile Include="bw-assets-parser\indices.cpp" />
+    <ClCompile Include="bw-assets-parser\interpolated_anim.cpp" />
+    <ClCompile Include="bw-assets-parser\primitives.cpp" />
+    <ClCompile Include="bw-assets-parser\pugixml.cpp" />
+    <ClCompile Include="bw-assets-parser\vertices.cpp" />
+    <ClCompile Include="bw-assets-parser\visual.cpp" />
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="FpsClass.cpp" />
@@ -183,9 +205,8 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="modelclass.cpp" />
-    <ClCompile Include="positionclass.cpp" />
     <ClCompile Include="rendertextureclass.cpp" />
-    <ClCompile Include="shadowshaderclass.cpp" />
+    <ClCompile Include="ShaderClass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="timerclass.cpp" />
