@@ -1,14 +1,17 @@
 #pragma once
 #include <string>
 #include <D3DX10math.h>
-class BoneNode {
-private:
-	std::string	m_name;
-	BoneNode*	m_pFirstChild;
-	BoneNode*	m_pSibling;
-	BoneNode*	m_pFather;
-	D3DXMATRIX	m_transformMatrix;
-	D3DXMATRIX	m_offsetMatrix;
+#include <map>
+#include <vector>
+
+struct BoneNode {
+public:
+	std::string	_name;
+	BoneNode*	_pFirstChild;
+	BoneNode*	_pSibling;
+	BoneNode*	_pFather;
+	D3DXMATRIX	_transformMatrix;
+	D3DXMATRIX	_offsetMatrix;
 
 public:
 	BoneNode();
@@ -18,11 +21,20 @@ public:
 	void SetFirstChild(BoneNode* child);
 	void SetSibling(BoneNode* sibling);
 
-	BoneNode* GetFirstChild();
-	BoneNode* GetSibling();
-	BoneNode* GetFather();
-
-	void SetTransfromMatrix(D3DXMATRIX transformMatrix);
-	void SetOffsetMatrix(D3DXMATRIX offsetMatrix);
 };
 
+class BoneTree {
+private:
+	BoneNode*	m_root;
+	std::map<std::string, BoneNode*>	m_mapBones;
+public:
+	BoneTree();
+	BoneTree(BoneNode* root);
+	~BoneTree();
+	BoneNode* GetBoneNodeFromName(std::string name);
+	void SetRoot(BoneNode* root);
+
+private:
+	void SetBonesMap(BoneNode* node);
+	void DestoryNode(BoneNode* node);
+};

@@ -13,3 +13,4 @@ const UCHAR KeyState[KEYS_NUM] = {
 };
 
 UINT G_Flag = 1;
+

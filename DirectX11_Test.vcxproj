@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="baseShader.h" />
+    <ClInclude Include="BW_ModelParser.h" />
     <ClInclude Include="BoneNode.h" />
     <ClInclude Include="bw-assets-parser\anim_calc.h" />
     <ClInclude Include="bw-assets-parser\array.h" />
@@ -186,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="baseShader.cpp" />
+    <ClCompile Include="BW_ModelParser.cpp" />
     <ClCompile Include="BoneNode.cpp" />
     <ClCompile Include="bw-assets-parser\anim_calc.cpp" />
     <ClCompile Include="bw-assets-parser\indices.cpp" />

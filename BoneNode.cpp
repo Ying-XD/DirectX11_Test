@@ -3,42 +3,66 @@
 
 
 BoneNode::BoneNode()
-	: m_name(""),m_pFirstChild(NULL), m_pSibling(NULL), m_pFather(NULL)
+	: _name(""),_pFirstChild(NULL), _pSibling(NULL), _pFather(NULL)
 { }
 
 
 BoneNode::~BoneNode() { }
 
 BoneNode::BoneNode(std::string name)
-	:m_name(name), m_pFirstChild(NULL), m_pSibling(NULL), m_pFather(NULL) 
+	:_name(name), _pFirstChild(NULL), _pSibling(NULL), _pFather(NULL) 
 { }
 
 void BoneNode::SetFirstChild(BoneNode * child) {
-	m_pFirstChild = child;
-	child->m_pFather =  this;
+	_pFirstChild = child;
+	child->_pFather =  this;
 }
 
 void BoneNode::SetSibling(BoneNode * sibling) {
-	m_pSibling = sibling;
-	sibling->m_pFather = m_pFather;
+	_pSibling = sibling;
+	sibling->_pFather = _pFather;
 }
 
-inline BoneNode * BoneNode::GetFirstChild() {
-	return m_pFirstChild;
+
+
+
+//	----------- BoneTree ----------- 
+BoneTree::BoneTree() { }
+
+BoneTree::BoneTree(BoneNode * root) :m_root(root){
+	SetBonesMap(root);
 }
 
-inline BoneNode * BoneNode::GetSibling() {
-	return m_pSibling;
+BoneTree::~BoneTree() {
+	DestoryNode(m_root);
 }
 
-inline BoneNode * BoneNode::GetFather() {
-	return m_pFather;
+BoneNode * BoneTree::GetBoneNodeFromName(std::string name) {
+	auto itr = m_mapBones.find(name);
+	if ( itr != m_mapBones.end())
+		return itr->second;
+	return nullptr;
 }
 
-inline void BoneNode::SetTransfromMatrix(D3DXMATRIX transformMatrix) {
-	m_transformMatrix = transformMatrix;
+void BoneTree::SetRoot(BoneNode * root) {
+	if (m_root)
+		DestoryNode(m_root);
+	m_root = root;
+	SetBonesMap(root);
 }
 
-inline void BoneNode::SetOffsetMatrix(D3DXMATRIX offsetMatrix) {
-	m_offsetMatrix = offsetMatrix;
+void BoneTree::SetBonesMap(BoneNode * node) {
+	m_mapBones[node->_name] = node;
+	if (node->_pFirstChild)
+		SetBonesMap(node->_pFirstChild);
+	if (node->_pSibling)
+	SetBonesMap(node->_pSibling);
+}
+
+void BoneTree::DestoryNode(BoneNode * node) {
+	if (node->_pFirstChild)
+		DestoryNode(node->_pFirstChild);
+	if (node->_pSibling)
+		DestoryNode(node->_pSibling);
+	delete node;
 }

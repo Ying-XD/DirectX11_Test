@@ -120,6 +120,9 @@
     <ClInclude Include="BoneNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BW_ModelParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -195,6 +198,9 @@
       <Filter>bw-assets-parser\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BoneNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BW_ModelParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
