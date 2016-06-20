@@ -25,9 +25,7 @@ ShaderClass::~ShaderClass() {
 }
 
 bool ShaderClass::Initialize(ID3D11Device* device, HWND hwnd) {
-	BaseShader::CreateSampler(device, &m_sampleStateWrap, D3D11_TEXTURE_ADDRESS_WRAP);
-	BaseShader::CreateSampler(device, &m_sampleStateClamp, D3D11_TEXTURE_ADDRESS_CLAMP);
-	BaseShader::CreateSampler(device, &m_sampleStateBorder, D3D11_TEXTURE_ADDRESS_BORDER);
+
 	CHECK_RESULT(
 		InitializeShader(device, hwnd, L"./Shaders/shadowVS.hlsl", L"./Shaders/shadowPS.hlsl")
 	);
@@ -77,7 +75,8 @@ bool ShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFil
 
 	CHECK_HRESULT(device->CreateVertexShader(vsBuffer->GetBufferPointer(), vsBuffer->GetBufferSize(), NULL, &m_vertexShader));
     CHECK_HRESULT(device->CreatePixelShader(psBuffer->GetBufferPointer(), psBuffer->GetBufferSize(), NULL, &m_pixelShader));
-	CHECK_HRESULT(device->CreateInputLayout(InputLayout::layout, InputLayout::numElements,
+
+	CHECK_HRESULT(device->CreateInputLayout(InputLayout::XYZNUV, _sizeof(InputLayout::XYZNUV),
 								  vsBuffer->GetBufferPointer(), vsBuffer->GetBufferSize(), &m_layout));
 	
 	SAFE_RELEASE(vsBuffer);
@@ -89,6 +88,9 @@ bool ShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFil
 		BaseShader::CreateCBuffer(device, sizeof(VS_LightBufferType), &m_lightBuffer2)
 	);
 
+	BaseShader::CreateSampler(device, &m_sampleStateWrap, D3D11_TEXTURE_ADDRESS_WRAP);
+	BaseShader::CreateSampler(device, &m_sampleStateClamp, D3D11_TEXTURE_ADDRESS_CLAMP);
+	BaseShader::CreateSampler(device, &m_sampleStateBorder, D3D11_TEXTURE_ADDRESS_BORDER);
 	return true;
 }
 
@@ -151,7 +153,6 @@ bool ShaderClass::SetShaderParameters(ID3D11DeviceContext* context, D3DXMATRIX w
 		CHECK_HRESULT(context->Map(m_lightBuffer2, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 		VS_LightBufferType* ptr= (VS_LightBufferType*)mappedResource.pData;
 		ptr->lightPosition = lightPosition;
-		ptr->smWidth = SHADOWMAP_WIDTH;
 		context->Unmap(m_lightBuffer2, 0);
 	}
 	context->VSSetConstantBuffers(1, 1, &m_lightBuffer2);

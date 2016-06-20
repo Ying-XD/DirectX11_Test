@@ -123,6 +123,9 @@
     <ClInclude Include="BW_ModelParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BW_ModelClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp">
@@ -203,54 +206,21 @@
     <ClCompile Include="BW_ModelParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BW_ModelClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\DeferredPS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\DeferredVS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\depthPS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\depthVS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="Shaders\FullScreenProcess.hlsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\FullScreenPS.hlsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\ImpBackwardPS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\ImpBackwardVS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\ImpForwardPS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\RTW_Depth.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\RTWDepth_Tess.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\Shadow_DeferredBackward.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\Shadow_Tess.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="Shaders\shadowPS.hlsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\shadowVS.hlsl">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="Shaders\WarpMapPS.hlsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

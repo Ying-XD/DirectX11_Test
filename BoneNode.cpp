@@ -51,6 +51,18 @@ void BoneTree::SetRoot(BoneNode * root) {
 	SetBonesMap(root);
 }
 
+BoneNode * BoneTree::GetRoot() {
+	return m_root;
+}
+
+void BoneTree::Trival(std::ofstream & out, BoneNode * node) {
+	out << node->_name << ':' << node->_transformMatrix.m[0][0] << std::endl;
+	if (node->_pFirstChild)
+		Trival(out, node->_pFirstChild);
+	if (node->_pSibling)
+		Trival(out, node->_pSibling);
+}
+
 void BoneTree::SetBonesMap(BoneNode * node) {
 	m_mapBones[node->_name] = node;
 	if (node->_pFirstChild)

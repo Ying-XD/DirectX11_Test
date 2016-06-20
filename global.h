@@ -23,6 +23,8 @@
 #define PI					(3.14159265f)
 
 
+#define _sizeof(a)	(sizeof(a) / sizeof(a[0]))
+
 #define CHECK_HRESULT(hr)		if (FAILED(hr)) return false
 #define CHECK_RESULT(result)	if (!(result)) return false
 #define CHECK_RESULT_MSG(result, msg) \

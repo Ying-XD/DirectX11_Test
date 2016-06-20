@@ -11,7 +11,8 @@
 #include "lightclass.h"
 #include "rendertextureclass.h"
 #include "ShaderClass.h"
-
+#include "BW_ModelClass.h"
+#include "BW_ModelParser.h"
 
 class GraphicsClass {
 public:
@@ -47,4 +48,9 @@ private:
 	FLOAT		m_frameTime;
 	std::vector<ModelClass*> m_models;
 	std::vector<ModelClass*> m_sence;
+
+	BW_ModelParser* m_bwParser;
+	ModelsList		m_modelsList;
+	BoneTree*		m_boneTree;
+
 };

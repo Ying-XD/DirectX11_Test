@@ -10,8 +10,9 @@ class InputLayout {
 public:
 	static D3D11_INPUT_ELEMENT_DESC layout[];
 	static UINT numElements;
-	static D3D11_INPUT_ELEMENT_DESC XYZNUV[];
-	static D3D11_INPUT_ELEMENT_DESC	XYZNUVTB[];
+	static D3D11_INPUT_ELEMENT_DESC XYZNUV[3];
+	static UINT	XYZNUV_EleNum;
+	static D3D11_INPUT_ELEMENT_DESC	XYZNUVTB[5];
 };
 
 class BaseShader {

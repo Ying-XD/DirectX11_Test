@@ -9,7 +9,6 @@ SamplerState SampleTypeBorder : register(s2);
 cbuffer LightBuffer {
 	float4  ambientColor;
 	float4  diffuseColor;
-    uint    rtwFlag;
 };
 
 

@@ -1,15 +1,45 @@
 #include "BW_ModelParser.h"
+#include "Log.h"
 BW_ModelParser::BW_ModelParser() {
 }
 
 
 BW_ModelParser::~BW_ModelParser() {
+	delete m_boneTree;
 }
 
-void BW_ModelParser::LoadModelFiles(std::string primitive_fileName, std::string visual_fileName) {
-	read_primitives(primitive_fileName);
+bool BW_ModelParser::Initialize(ID3D11Device * device) {
+	m_device = device;
+	m_boneTree = new BoneTree;
+	return true;
+}
 
+bool BW_ModelParser::LoadModelFiles(std::string primitive_fileName, std::string visual_fileName) {
+	read_primitives(primitive_fileName);
 	read_visual(visual_fileName);
+
+	for each (auto & mInfo in m_modelsInfoList) {
+		auto itr_v = m_verticesList.find(mInfo.vertexName);
+		auto itr_i = m_indicesList.find(mInfo.indexName);
+
+		if (itr_v == m_verticesList.end() || itr_i == m_indicesList.end()) continue;
+
+		const auto & vertices = itr_v->second;
+		const auto & indices = itr_i->second;
+		BW_ModelClass* pModel = new BW_ModelClass;
+		pModel->LoadModel(m_device, vertices, indices);
+		pModel->SetBoneList(mInfo.bnList);
+		m_modelList.push_back(pModel);
+	}
+	return true;
+}
+
+BoneTree* BW_ModelParser::GetBoneTree() {
+	return m_boneTree;
+}
+
+ModelsList BW_ModelParser::GetModels() {
+	return m_modelList;
 }
 
 void BW_ModelParser::read_primitives(std::string fileName) {
@@ -23,7 +53,7 @@ void BW_ModelParser::read_primitives(std::string fileName) {
 		if (m.first.find("vertices") != std::string::npos) {
 			m_verticesList.insert(std::make_pair(m.first, std::move(VerticesAsset(m.second))));
 		}
-		if (m.first.find("inidces") != std::string::npos) {
+		if (m.first.find("indices") != std::string::npos) {
 			m_indicesList.insert(std::make_pair(m.first, std::move(IndicesAsset(m.second))));
 		}
 	}
@@ -39,6 +69,12 @@ bool BW_ModelParser::read_visual(std::string fileName) {
 		if (strcmp(xmlnode.name(), "node") == 0) {
 			root = ReadBoneNodes(xmlnode);
 		}
+		xmlnode = xmlnode.next_sibling();
+	}
+	m_boneTree->SetRoot(root);
+
+	xmlnode = doc.child("root").first_child();
+	while (xmlnode) {
 		if (strcmp(xmlnode.name(), "renderSet") == 0) {
 			ReadRenderSet(xmlnode);
 		}
@@ -47,7 +83,6 @@ bool BW_ModelParser::read_visual(std::string fileName) {
 		}
 		xmlnode = xmlnode.next_sibling();
 	}
-	m_boneTree.SetRoot(root);
 	return true;
 }
 
@@ -68,7 +103,7 @@ D3DXMATRIX BW_ModelParser::GetTransformatMatrix(pugi::xml_node xmlnode) {
 
 		mat.m[i][0] = atof(value.substr(0, a).c_str());
 		mat.m[i][1] = atof(value.substr(a + 1, b).c_str());
-		mat.m[i][4] = atof(value.substr(b + 1, value.length()).c_str());
+		mat.m[i][2] = atof(value.substr(b + 1, value.length()).c_str());
 		mat.m[i][3] = (i == 3) ? 1.0f : 0.0f;
 		
 	}
@@ -77,13 +112,13 @@ D3DXMATRIX BW_ModelParser::GetTransformatMatrix(pugi::xml_node xmlnode) {
 
 BoneNode * BW_ModelParser::ReadBoneNodes(pugi::xml_node xmlnode) {
 	std::string name = xmlnode.child("identifier").first_child().value();
-	name = name.substr(name.find_first_not_of("\t"), name.find_last_not_of("\t"));
+	name = RemoveTabStops(name);
 
 	BoneNode* boneNode		= new BoneNode(name);
 	BoneNode* childNode		= nullptr;
 	BoneNode* tmp			= nullptr;
 
-	boneNode->_transformMatrix = GetTransformatMatrix(xmlnode.child("transformat"));
+	boneNode->_transformMatrix = GetTransformatMatrix(xmlnode.child("transform"));
 
 	xmlnode = xmlnode.child("node");
 	while (xmlnode) {
@@ -99,15 +134,15 @@ BoneNode * BW_ModelParser::ReadBoneNodes(pugi::xml_node xmlnode) {
 	return boneNode;
 }
 
-void BW_ModelParser::ReadRenderSet(pugi::xml_node xmlnode) {
+bool BW_ModelParser::ReadRenderSet(pugi::xml_node xmlnode) {
 	xmlnode = xmlnode.child("node");
-	ModelsGroup model;
-	std::vector<std::string> vecBoneName;
+	BoneNodeList  bn_list;
 	std::string indexName, vertexName;
 	while (xmlnode) {
 		if (strcmp(xmlnode.name(), "node") == 0) {
 			std::string name = xmlnode.first_child().value();
-			vecBoneName.push_back(std::move(RemoveTabStops(name)));
+			name = RemoveTabStops(name);
+			bn_list.push_back(m_boneTree->GetBoneNodeFromName(name));
 		}
 		if (strcmp(xmlnode.name(), "geometry") == 0) {
 			vertexName = xmlnode.child("vertices").first_child().value();
@@ -116,11 +151,12 @@ void BW_ModelParser::ReadRenderSet(pugi::xml_node xmlnode) {
 		xmlnode = xmlnode.next_sibling();
 	}
 
-	model.vertexName = std::move(RemoveTabStops(vertexName));
-	model.indexName	 = std::move(RemoveTabStops(indexName));
-	model.vBoneName  = std::move(vecBoneName);
-
-	m_modelsGroupList.push_back(std::move(model));
+	ModelsInfoType modelInfo;
+	modelInfo.vertexName = RemoveTabStops(vertexName);
+	modelInfo.indexName  = RemoveTabStops(indexName);
+	modelInfo.bnList	 = std::move(bn_list);
+	m_modelsInfoList.push_back(std::move(modelInfo));
+	return true;
 }
 
 void BW_ModelParser::ReadBoundingBox(pugi::xml_node xmlnode) {

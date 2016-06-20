@@ -28,7 +28,7 @@ private:
 	struct VS_LightBufferType
 	{
 		D3DXVECTOR3 lightPosition;
-		UINT32		smWidth;
+		UINT32		padding;
 	};
 	
 public:

@@ -15,17 +15,15 @@ cbuffer MatrixBuffer
 cbuffer LightBuffer
 {
     float3  lightPosition;
-    uint    rtwFlag;
-    uint    sm_width;
-	float3  padding;
+	float   padding;
 };
 
 
 struct VS_INPUT
 {
     float4 position : POSITION;
-    float2 tex      : TEXCOORD0;
 	float3 normal   : NORMAL;
+    float2 tex      : TEXCOORD0;
 };
 
 struct PS_INPUT

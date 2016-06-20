@@ -9,12 +9,10 @@ GraphicsClass::GraphicsClass()
 	m_Camera		= 0;
 	m_CubeModel		= 0;
 	m_Light			= 0;
-
 	m_ShadowShader	= 0;
-
 	m_keysPressed.Reset();
-	
-	m_switch.num_8 = true;
+
+	m_bwParser		= 0;
 }
 
 
@@ -73,6 +71,13 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_ShadowShader = new ShaderClass;
 	CHECK_RESULT_MSG(m_ShadowShader && m_ShadowShader->Initialize(device, hwnd), "Could not initialize the shadow shader object.");
 
+	m_bwParser = new BW_ModelParser;
+	CHECK_RESULT_MSG(m_bwParser && m_bwParser->Initialize(device),"Could not initialize BW_ModelParser.");
+	CHECK_RESULT_MSG(m_bwParser->LoadModelFiles("./res/10006_50097_00_body.primitives","./res/10006_50097_00_body.visual"), "Could not load files in bw_parser");
+
+	m_modelsList = m_bwParser->GetModels();
+	m_boneTree	 = m_bwParser->GetBoneTree();
+	auto root = m_boneTree->GetRoot();
 	return true;
 }
 
@@ -85,15 +90,20 @@ void GraphicsClass::Shutdown()
 	for each (auto model in m_sence) {
 		SHUTDOWN_MODEL(model);
 	}
-	
+	for each (auto  model in m_modelsList) {
+		SHUTDOWN_MODEL(model);
+	}
 	SAFE_DELETE(m_Camera);
 	SAFE_DELETE(m_Light);
-
 	SHUTDOWN_DELETE(m_D3D);
 }
 
 
 bool GraphicsClass::Frame() {
+	static bool showModel = false;
+
+
+
 
 	static D3DXVECTOR3	lightPos(0.0f, 8.0f, -5.0f);
 
@@ -125,7 +135,6 @@ void GraphicsClass::SetFrameTime(FLOAT frametime) {
 KeysPressed GraphicsClass::GetKeysSwitch() {
 	return m_switch;
 }
-
 
 bool GraphicsClass::CreateRenderTexture(RenderTextureClass ** renderTexPtr, TextureType texType) {
 	bool result = true;
@@ -178,11 +187,11 @@ bool GraphicsClass::conventionalShadowmap() {
 
 	// ---- 对模型进行渲染 -----
 
-	for each (auto model in m_sence) {
+	for each (auto model in m_modelsList) {
 		m_D3D->GetWorldMatrix(worldMatrix);
 		model->GetPosition(posX, posY, posZ);
 		D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
-
+		
 		// 将 vertex和index 加载到 pipeline中， 渲染 模型
 		model->Render(m_D3D->GetDeviceContext());
 

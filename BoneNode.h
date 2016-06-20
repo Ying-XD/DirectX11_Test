@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <fstream>
 #include <string>
 #include <D3DX10math.h>
 #include <map>
@@ -33,8 +35,12 @@ public:
 	~BoneTree();
 	BoneNode* GetBoneNodeFromName(std::string name);
 	void SetRoot(BoneNode* root);
+	BoneNode* GetRoot();
 
+	void Trival(std::ofstream & out, BoneNode* node);
 private:
 	void SetBonesMap(BoneNode* node);
 	void DestoryNode(BoneNode* node);
 };
+
+typedef	std::vector<BoneNode*>	BoneNodeList;

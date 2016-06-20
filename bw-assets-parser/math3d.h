@@ -21,7 +21,7 @@ typedef float real_t;
 #endif
 
 const real_t _EPSILON = real_t(1.0e-10);
-const real_t _AVOID_DIV_BY_0 = std::numeric_limits<real_t>::min();
+const real_t _AVOID_DIV_BY_0 = (std::numeric_limits<real_t>::min)();
 
 inline bool almostEqual(real_t x, real_t y, real_t eps) { return std::fabs(x-y)<eps; }
 inline bool equal(real_t x, real_t y) { return std::fabs(x-y)<_EPSILON; }
@@ -236,7 +236,7 @@ inline void quat::setAxisAngle(vec3 const& axis, real_t radian) {
 }
 
 inline vec3 quat::axis() const {
-    real_t const s = std::sqrt(std::max(real_t(1.f - w*w), real_t(0.f)));
+    real_t const s = std::sqrt((std::max)(real_t(1.f - w*w), real_t(0.f)));
     if (s >= _EPSILON) {
         return vec3(x/s, y/s, z/s);
     } else {
@@ -1091,7 +1091,7 @@ inline bool valid(mat4 const& m)
 
 inline real_t clamp(real_t v, real_t min, real_t max)
 {
-    return std::max(std::min(v, max), min);
+    return (std::max)((std::min)(v, max), min);
 }
 
 inline vec2   clamp(vec2 const& v, vec2 const& min, vec2 const& max)

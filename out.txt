@@ -1,0 +1,206 @@
+Scene Root:1
+HP_root:1
+biped:-2e-06
+biped Pelvis:0
+biped Spine:0.999999
+biped Spine1:0.999954
+biped Spine2:0.978525
+biped Neck:0.906888
+biped L Clavicle:-0.291759
+biped L UpperArm:0.859809
+biped L Forearm:0.934267
+biped L Hand:0.96792
+biped L Finger0:0.885145
+biped L Finger01:0.968747
+biped L Finger02:0.974918
+biped L Finger02BlendBoneObject003:-0.300772
+biped L Finger01BlendBoneObject003:-0.299169
+biped L Finger0BlendBonebody:-0.27967
+biped L Finger0BlendBoneObject003:-0.279669
+biped L Finger1:0.982109
+biped L Finger11:0.999415
+biped L Finger12:0.999642
+biped L Finger12BlendBoneObject003:-0.406308
+biped L Finger11BlendBoneObject003:-0.430124
+biped L Finger1BlendBoneObject003:-0.46013
+biped L Finger2:0.941397
+biped L Finger21:0.985649
+biped L Finger22:0.998655
+biped L Finger22BlendBoneObject003:-0.096875
+biped L Finger21BlendBoneObject003:-0.148349
+biped L Finger2BlendBoneObject003:-0.313152
+biped L Finger3:0.837767
+biped L Finger31:0.975307
+biped L Finger32:0.992997
+biped L Finger32BlendBoneObject003:0.238633
+biped L Finger31BlendBoneObject003:0.123057
+biped L Finger3BlendBoneObject003:-0.097655
+biped L Finger4:0.781996
+biped L Finger41:0.953679
+biped L Finger42:0.980817
+biped L Finger42BlendBoneObject003:0.453344
+biped L Finger41BlendBoneObject003:0.274524
+biped L Finger4BlendBoneObject003:-0.022282
+biped L HandBlendBonebody:-0.614169
+biped L HandBlendBoneObject003:-0.614169
+biped L ForearmBlendBonebody:-0.758739
+biped L ForearmBlendBoneObject003:-0.758739
+shoulder_repair_L:-1
+shoulder_repair_LBlendBonebody:0.664115
+biped L ForeTwist:0.934267
+biped L ForeTwist1:1
+bone_software_L22:-0.036352
+bone_software_L23:0.999989
+bone_software_L24:0.999918
+bone_software_L24BlendBonebody:0.044324
+bone_software_L23BlendBonebody:0.054795
+bone_software_L22BlendBonebody:0.057722
+biped L ForeTwist1BlendBonebody:-0.758739
+biped L ForeTwist1BlendBoneObject003:-0.758738
+biped L ForeTwistBlendBonebody:-0.758739
+biped L ForeTwistBlendBoneObject003:-0.758739
+biped L UpperArmBlendBonebody:-0.664116
+biped L UpperArmBlendBoneObject003:-0.664116
+biped L ClavicleBlendBonebody:-0.946796
+biped R Clavicle:-0.291759
+biped R UpperArm:0.859809
+biped R Forearm:0.934267
+biped R Hand:0.96792
+biped R Finger0:0.885145
+biped R Finger01:0.968747
+biped R Finger02:0.974918
+biped R Finger02BlendBoneObject003:0.300772
+biped R Finger01BlendBoneObject003:0.299168
+biped R Finger0BlendBonebody:0.279668
+biped R Finger0BlendBoneObject003:0.279668
+biped R Finger1:0.982109
+biped R Finger11:0.999414
+biped R Finger12:0.999642
+biped R Finger12BlendBoneObject003:0.406307
+biped R Finger11BlendBoneObject003:0.430123
+biped R Finger1BlendBoneObject003:0.460129
+biped R Finger2:0.941397
+biped R Finger21:0.985649
+biped R Finger22:0.998655
+biped R Finger22BlendBoneObject003:0.096875
+biped R Finger21BlendBoneObject003:0.148348
+biped R Finger2BlendBoneObject003:0.313151
+biped R Finger3:0.837767
+biped R Finger31:0.975307
+biped R Finger32:0.992997
+biped R Finger32BlendBoneObject003:-0.238633
+biped R Finger31BlendBoneObject003:-0.123057
+biped R Finger3BlendBoneObject003:0.097655
+biped R Finger4:0.781996
+biped R Finger41:0.953679
+biped R Finger42:0.980816
+biped R Finger42BlendBoneObject003:-0.453344
+biped R Finger41BlendBoneObject003:-0.274524
+biped R Finger4BlendBoneObject003:0.022282
+biped R HandBlendBonebody:0.614169
+biped R HandBlendBoneObject003:0.614169
+biped R ForearmBlendBoneObject003:0.758738
+shoulder_repair_R:-1
+shoulder_repair_RBlendBonebody:-0.664116
+biped R ForeTwist:0.934267
+biped R ForeTwist1:1
+bone_software_R22:-0.036353
+bone_software_R23:0.999989
+bone_software_R24:0.999918
+bone_software_R24BlendBonebody:-0.044322
+bone_software_R23BlendBonebody:-0.054794
+bone_software_R22BlendBonebody:-0.057721
+biped R ForeTwist1BlendBonebody:0.758738
+biped R ForeTwist1BlendBoneObject003:0.758738
+biped R ForeTwistBlendBonebody:0.758738
+biped R ForeTwistBlendBoneObject003:0.758738
+biped R UpperArmBlendBonebody:0.664116
+biped R UpperArmBlendBoneObject003:0.664116
+biped R ClavicleBlendBonebody:0.946796
+biped Head:0.996387
+biped HeadBlendBonebody:-0
+biped NeckBlendBonebody:-0
+bone_software_L16:-0.586764
+bone_software_L17:0.999914
+bone_software_L18:0.999997
+bone_software_L19:0.999999
+bone_software_L20:1
+bone_software_L20BlendBonebody:-0.128765
+bone_software_L19BlendBonebody:-0.129276
+bone_software_L18BlendBonebody:-0.130266
+bone_software_L17BlendBonebody:-0.12886
+bone_software_L16BlendBonebody:-0.120663
+bone_software_R16:-0.586764
+bone_software_R17:0.999914
+bone_software_R18:0.999998
+bone_software_R19:0.999999
+bone_software_R20:1
+bone_software_R20BlendBonebody:0.128765
+bone_software_R19BlendBonebody:0.129276
+bone_software_R18BlendBonebody:0.130266
+bone_software_R17BlendBonebody:0.12886
+bone_software_R16BlendBonebody:0.120663
+breast_R01:0.016846
+breast_R02:-0.748053
+breast_R02BlendBonebody:-0.282581
+breast_R01BlendBonebody:0.366333
+breast_L01:0.016845
+breast_L02:-0.748054
+breast_L02BlendBonebody:0.28258
+breast_L01BlendBonebody:-0.366333
+biped Spine2BlendBonebody:0
+biped Spine1BlendBonebody:0
+biped SpineBlendBonebody:0
+biped R Thigh:-0.999753
+biped R Calf:0.997345
+biped R Foot:0.995484
+biped R Toe0:0
+biped R Toe0BlendBonebody:0.036303
+biped R FootBlendBonebody:-0
+biped R CalfBlendBonebody:0.001264
+hips_repair_R:0.990824
+hips_repair_RBlendBonebody:0.00847
+biped R ThighBlendBonebody:0.001263
+biped L Thigh:-0.999753
+biped L Calf:0.997345
+biped L Foot:0.995484
+biped L Toe0:0
+biped L Toe0BlendBonebody:-0.036305
+biped L FootBlendBonebody:-0
+biped L CalfBlendBonebody:-0.001263
+hips_repair_L:0.990824
+hips_repair_LBlendBonebody:-0.00847
+biped L ThighBlendBonebody:-0.001263
+bone_software_L26:-0.970761
+bone_software_L26BlendBonebody:-0.179754
+bone_software_L31:-0.925308
+bone_software_L32:0.98354
+bone_software_L32BlendBonebody:-0.198567
+bone_software_M22:-0.974954
+bone_software_M23:0.98506
+bone_software_M24:0.999779
+bone_software_M25:0.999997
+bone_software_M25BlendBonebody:-0
+bone_software_M24BlendBonebody:-0
+bone_software_M23BlendBonebody:-0
+bone_software_M22BlendBonebody:-0
+bone_software_L36:-0.885029
+bone_software_L36BlendBonebody:-0.246489
+bone_software_M40:-0.861112
+bone_software_M41:0.954999
+bone_software_M42:0.999981
+bone_software_M43:0.999614
+bone_software_M44:0.999935
+bone_software_M44BlendBonebody:0
+bone_software_M43BlendBonebody:0
+bone_software_M42BlendBonebody:0
+bone_software_M41BlendBonebody:0
+bone_software_M40BlendBonebody:-0
+bone_software_R36:-0.885028
+bone_software_R36BlendBonebody:0.246489
+bone_software_R26:-0.970761
+bone_software_R26BlendBonebody:0.179754
+bone_software_R31:-0.925307
+bone_software_R32:0.98354
+bone_software_R32BlendBonebody:0.198567
+biped PelvisBlendBonebody:1e-06
