@@ -9,10 +9,8 @@ SystemClass::SystemClass()
 	m_Input = 0;
 	m_Graphics = 0;
 	m_Timer = 0;
-	//m_Position = 0;
-	m_Fps = 0;
 
-	Log::GetInstance();
+	//Log::GetInstance();
 }
 
 
@@ -49,9 +47,6 @@ bool SystemClass::Initialize()
 	m_Timer = new TimerClass;
 	CHECK_RESULT_MSG(m_Timer && m_Timer->Initialize(), "Can not initialize TimerClass");
 
-	m_Fps = new FpsClass;
-	CHECK_RESULT_MSG(m_Fps && m_Fps->Initialize());
-
 	return true;
 }
 
@@ -60,7 +55,6 @@ void SystemClass::Shutdown() {
 	SAFE_DELETE(m_Timer);
 	SHUTDOWN_DELETE(m_Graphics);
 	SAFE_DELETE(m_Input);
-	SAFE_DELETE(m_Fps);
 
 	ShutdownWindows();
 }
@@ -94,7 +88,7 @@ bool SystemClass::Frame() {
 
 	m_Timer->Frame();
 	m_Graphics->SetFrameTime(m_Timer->GetTime());
-	m_Fps->Frame();
+	//m_Fps->Frame();
 
 	CHECK_RESULT(m_Graphics->Frame());
 

@@ -66,9 +66,6 @@
     <ClInclude Include="baseShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FpsClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fullscreenShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -167,9 +164,6 @@
     <ClCompile Include="baseShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FpsClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="fullscreenShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -217,10 +211,10 @@
     <None Include="Shaders\FullScreenPS.hlsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\shadowPS.hlsl">
+    <None Include="Shaders\ShaderPS.hlsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\shadowVS.hlsl">
+    <None Include="Shaders\ShaderVS.hlsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

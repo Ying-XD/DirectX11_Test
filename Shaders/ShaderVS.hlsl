@@ -1,7 +1,5 @@
 //  --------------- shadowVS.hlsl ---------------
 
-Texture2D warpMaps          : register(t0);
-SamplerState SampleTypeBorder : register(s0);
 cbuffer MatrixBuffer
 {
 	matrix worldMatrix;
@@ -35,7 +33,7 @@ struct PS_INPUT
 };
 
 
-PS_INPUT ShadowVertexShader(VS_INPUT input)
+PS_INPUT VS(VS_INPUT input)
 {
     PS_INPUT output;
 	float4 worldPosition;

@@ -1,23 +1,14 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: rendertextureclass.h
-////////////////////////////////////////////////////////////////////////////////
+// ------------ renderTexture.h	------------
 #pragma once
 
-
-//////////////
-// INCLUDES //
-//////////////
 #include <d3d11.h>
 #include <d3dx10math.h>
 #include <vector>
 #include "d3dclass.h"
 #include "global.h"
+#include "Log.h"
 
-////////////////////////////////////////////////////////////////////////////////
-// Class name: RenderTextureClass
-////////////////////////////////////////////////////////////////////////////////
-class RenderTextureClass
-{
+class RenderTextureClass {
 public:
 	RenderTextureClass();
 	RenderTextureClass(const RenderTextureClass&);
@@ -46,13 +37,11 @@ private:
 	ID3D11DepthStencilView* m_depthStencilView;
 	D3D11_VIEWPORT m_viewport;
 
-
 	UINT	m_viewSize;
-	//ID3D11Texture2D**			m_renderTargetTextureArr;
-	//ID3D11RenderTargetView**	m_renderTargetViewArr;
-	//ID3D11ShaderResourceView**	m_shaderResourceViewArr;
-
 	std::vector<ID3D11Texture2D*>			m_renderTargetTextureArr;
 	std::vector<ID3D11RenderTargetView*>	m_renderTargetViewArr;
 	std::vector<ID3D11ShaderResourceView*>	m_shaderResourceViewArr;
+public:
+	static bool CreateRenderTexture(ID3D11Device* device, RenderTextureClass** pRenderTex, TextureType texType);
 };
+

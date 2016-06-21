@@ -80,7 +80,8 @@ void BW_ModelClass::GetPosition(FLOAT & x, FLOAT & y, FLOAT & z) {
 }
 
 void BW_ModelClass::Render(ID3D11DeviceContext * context) {
-	context->IASetVertexBuffers(0, 1, &m_vertexBuffer, &m_vertexStride, 0);
+	UINT	offset = 0;
+	context->IASetVertexBuffers(0, 1, &m_vertexBuffer, &m_vertexStride, &offset);
 	context->IASetIndexBuffer(m_indexBuffer, m_indexFormat, 0);
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
@@ -90,6 +91,7 @@ int BW_ModelClass::GetIndexCount() {
 }
 
 ID3D11ShaderResourceView * BW_ModelClass::GetTexture() {
+	if (!m_Texture) return NULL;
 	return m_Texture->GetTexture();
 }
 

@@ -20,7 +20,7 @@ struct PS_INPUT {
 };
 
 
-float4 ShadowPixelShader(PS_INPUT input) : SV_TARGET
+float4 PS(PS_INPUT input) : SV_TARGET
 {
     float4  color;
     float   lightIntensity;
@@ -36,6 +36,6 @@ float4 ShadowPixelShader(PS_INPUT input) : SV_TARGET
 
 	textureColor = shaderTexture.Sample(SampleTypeWrap, input.tex);
 
-	color = color * textureColor;
+	//color = color * textureColor;
     return color;
 }

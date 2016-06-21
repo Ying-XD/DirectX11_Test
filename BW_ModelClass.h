@@ -4,7 +4,7 @@
 #include "BoneNode.h"
 #include "parser_header.h"
 
-
+#include <fstream>
 #include "textureclass.h"
 class BW_ModelClass {
 public:
@@ -50,11 +50,11 @@ inline void * BW_ModelClass::UnpackVertex__(const VerticesAsset& vAssets) {
 	UINT	nVertices = vAssets.data.size() / vAssets.typeInfo().stride;
 	TOUT* pData = new TOUT[nVertices];
 	UINT  stride = vAssets.typeInfo().stride;
+
 	const auto & vdata = vAssets.data.data();
 	for (UINT i = 0, j = 0;i < nVertices;i++, j += stride) {
 		pData[i] = TOUT(*(TIN*)(vdata + j));
 	}
-
 	return pData;
 }
 template<typename T>

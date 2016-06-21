@@ -30,9 +30,9 @@ public:
 	KeysPressed GetKeysSwitch();
 private:
 
-	bool CreateRenderTexture(RenderTextureClass** renderTexPtr, TextureType texType);
+	//bool CreateRenderTexture(RenderTextureClass** renderTexPtr, TextureType texType);
 
-	bool conventionalShadowmap();
+	bool Render();
 
 private:
 	D3DClass* m_D3D;
@@ -40,13 +40,12 @@ private:
 	ModelClass *m_CubeModel;
 	LightClass* m_Light;
 
-	ShaderClass*	m_ShadowShader;
+	ShaderClass*	m_Shader;
 	
 	KeysPressed m_keysPressed;
 	KeysPressed m_switch;
 
 	FLOAT		m_frameTime;
-	std::vector<ModelClass*> m_models;
 	std::vector<ModelClass*> m_sence;
 
 	BW_ModelParser* m_bwParser;

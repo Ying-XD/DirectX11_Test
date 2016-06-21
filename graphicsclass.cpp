@@ -9,7 +9,7 @@ GraphicsClass::GraphicsClass()
 	m_Camera		= 0;
 	m_CubeModel		= 0;
 	m_Light			= 0;
-	m_ShadowShader	= 0;
+	m_Shader = 0;
 	m_keysPressed.Reset();
 
 	m_bwParser		= 0;
@@ -42,8 +42,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	m_Camera->SetPosition(0.0f, 5.0f, -10.0f);
-	
+	m_Camera->SetPosition(0.0f, 3.0f, 3.0f);
+	m_Camera->SetLookAt(0.0f, -1.5f, -2.0f);
 	
 	// Create the cube model object.
 	m_CubeModel = new ModelClass;
@@ -51,7 +51,6 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 
 	m_CubeModel->SetPosition(0.0f, 1.0f, 0.0f);
 	
-	m_models.push_back(m_CubeModel);
 
 	m_sence.push_back(m_CubeModel);
 
@@ -68,8 +67,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Light->GenerateProjectionMatrix(LIGHTVIEW_FAR, LIGHTVIEW_NEAR);
 
 	// Create the shadow shader object.
-	m_ShadowShader = new ShaderClass;
-	CHECK_RESULT_MSG(m_ShadowShader && m_ShadowShader->Initialize(device, hwnd), "Could not initialize the shadow shader object.");
+	m_Shader = new ShaderClass;
+	CHECK_RESULT_MSG(m_Shader && m_Shader->Initialize(device, hwnd), "Could not initialize the shadow shader object.");
 
 	m_bwParser = new BW_ModelParser;
 	CHECK_RESULT_MSG(m_bwParser && m_bwParser->Initialize(device),"Could not initialize BW_ModelParser.");
@@ -85,7 +84,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 void GraphicsClass::Shutdown()
 {
 
-	SHUTDOWN_SHADER(m_ShadowShader);
+	SHUTDOWN_SHADER(m_Shader);
 
 	for each (auto model in m_sence) {
 		SHUTDOWN_MODEL(model);
@@ -100,22 +99,20 @@ void GraphicsClass::Shutdown()
 
 
 bool GraphicsClass::Frame() {
-	static bool showModel = false;
 
 
 
 
-	static D3DXVECTOR3	lightPos(0.0f, 8.0f, -5.0f);
+	static D3DXVECTOR3	lightPos(0.0f, 8.0f, 5.0f);
 
 	m_Camera->Render(&m_keysPressed);
 	m_Light->SetPosition(lightPos);
 	m_Light->GenerateViewMatrix();
 
-	return conventionalShadowmap();
+	return Render();
 	
 	return true;
 }
-
 
 
 void GraphicsClass::SetKeysPressed(KeysPressed keysPressed) {
@@ -136,41 +133,41 @@ KeysPressed GraphicsClass::GetKeysSwitch() {
 	return m_switch;
 }
 
-bool GraphicsClass::CreateRenderTexture(RenderTextureClass ** renderTexPtr, TextureType texType) {
-	bool result = true;
-	RenderTextureClass* renderTex = new RenderTextureClass;
-	if (!renderTex) return false;
-	
-	renderTex->SetTextureType(texType);
-	switch (texType) {
-		case ScreenTexture:
-			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT);
-			break;
-		case ShadowTexture:
-			result = renderTex->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, SHADOWMAP_WIDTH);
-			break;
-		case WarpMapTexture:
-			result = renderTex->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, 2);
-			break;
-		case ScreenColorTexture:
-			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, DXGI_FORMAT_R32G32B32A32_FLOAT);
-			break;
-		default:
-			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT);
-			break;
-	}
-	if (!result) {
-		Log::GetInstance()->LogMsg("Could not initialize the render to texture object.");
-		delete renderTex;
-	}
-	else {
-		*renderTexPtr = renderTex;
-	}
-	return result;
-}
+//bool GraphicsClass::CreateRenderTexture(RenderTextureClass ** renderTexPtr, TextureType texType) {
+//	bool result = true;
+//	RenderTextureClass* renderTex = new RenderTextureClass;
+//	if (!renderTex) return false;
+//	
+//	renderTex->SetTextureType(texType);
+//	switch (texType) {
+//		case ScreenTexture:
+//			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT);
+//			break;
+//		case ShadowTexture:
+//			result = renderTex->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, SHADOWMAP_WIDTH);
+//			break;
+//		case WarpMapTexture:
+//			result = renderTex->Initialize(m_D3D->GetDevice(), SHADOWMAP_WIDTH, 2);
+//			break;
+//		case ScreenColorTexture:
+//			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT, DXGI_FORMAT_R32G32B32A32_FLOAT);
+//			break;
+//		default:
+//			result = renderTex->Initialize(m_D3D->GetDevice(), SCREEN_WIDTH, SCREEN_HEIGHT);
+//			break;
+//	}
+//	if (!result) {
+//		Log::GetInstance()->LogMsg("Could not initialize the render to texture object.");
+//		delete renderTex;
+//	}
+//	else {
+//		*renderTexPtr = renderTex;
+//	}
+//	return result;
+//}
 
 
-bool GraphicsClass::conventionalShadowmap() {
+bool GraphicsClass::Render() {
 	
 	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	D3DXMATRIX lightViewMatrix, lightProjectionMatrix;
@@ -195,10 +192,10 @@ bool GraphicsClass::conventionalShadowmap() {
 		// 将 vertex和index 加载到 pipeline中， 渲染 模型
 		model->Render(m_D3D->GetDeviceContext());
 
-		m_ShadowShader->SetLightParameters(m_Light->GetPosition(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
-		result = m_ShadowShader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
+		m_Shader->SetLightParameters(m_Light->GetPosition(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
+		result = m_Shader->Render(m_D3D->GetDeviceContext(), model->GetIndexCount(),
 										worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix, lightProjectionMatrix,
-										model->GetTexture());
+										NULL/*model->GetTexture()*/);
 
 		if (!result) {
 			return false;

@@ -27,7 +27,7 @@ ShaderClass::~ShaderClass() {
 bool ShaderClass::Initialize(ID3D11Device* device, HWND hwnd) {
 
 	CHECK_RESULT(
-		InitializeShader(device, hwnd, L"./Shaders/shadowVS.hlsl", L"./Shaders/shadowPS.hlsl")
+		InitializeShader(device, hwnd, L"./Shaders/ShaderVS.hlsl", L"./Shaders/ShaderPS.hlsl")
 	);
 	return true;
 }
@@ -68,8 +68,8 @@ bool ShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFil
 	ID3D10Blob* psBuffer = 0;
 
 	CHECK_RESULT(
-		BaseShader::CompileVSFromFile(vsFilename, "ShadowVertexShader", &vsBuffer, hwnd)	&&
-		BaseShader::CompilePSFromFile(psFilename, "ShadowPixelShader", &psBuffer, hwnd)
+		BaseShader::CompileVSFromFile(vsFilename, "VS", &vsBuffer, hwnd)	&&
+		BaseShader::CompilePSFromFile(psFilename, "PS", &psBuffer, hwnd)
 	);
 	
 

@@ -34,11 +34,12 @@ void Camera::SetFrameTime(float frameTime) {
 }
 
 void Camera::SetLookAt(float x, float y, float z) {
+
 	m_lookAt.x = x;
 	m_lookAt.y = y;
 	m_lookAt.z = z;
-
-	m_rotationY = PI + atanf(m_lookAt.z / m_lookAt.x);
+	D3DXVec3Normalize(&m_lookAt, &m_lookAt);
+	m_rotationY = atanf(m_lookAt.z / m_lookAt.x);
 	m_rotationX = asinf(m_lookAt.y);
 }
 

@@ -4,20 +4,11 @@
 #include "timerclass.h"
 
 
-TimerClass::TimerClass()
-{
-}
+TimerClass::TimerClass() { }
 
+TimerClass::TimerClass(const TimerClass& other) { }
 
-TimerClass::TimerClass(const TimerClass& other)
-{
-}
-
-
-TimerClass::~TimerClass()
-{
-}
-
+TimerClass::~TimerClass() { }
 
 bool TimerClass::Initialize()
 {

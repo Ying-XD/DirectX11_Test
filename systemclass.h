@@ -42,7 +42,7 @@ private:
 	InputClass* m_Input;
 	GraphicsClass* m_Graphics;
 	TimerClass* m_Timer;
-	FpsClass* m_Fps;
+	//FpsClass* m_Fps;
 };
 
 

@@ -171,7 +171,6 @@
     <ClInclude Include="bw-assets-parser\visual.h" />
     <ClInclude Include="cameraclass.h" />
     <ClInclude Include="d3dclass.h" />
-    <ClInclude Include="FpsClass.h" />
     <ClInclude Include="fullscreenShader.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="graphicsclass.h" />
@@ -200,7 +199,6 @@
     <ClCompile Include="bw-assets-parser\visual.cpp" />
     <ClCompile Include="cameraclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
-    <ClCompile Include="FpsClass.cpp" />
     <ClCompile Include="fullscreenShader.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
@@ -222,10 +220,10 @@
     <None Include="Shaders\FullScreenPS.hlsl">
       <FileType>Document</FileType>
     </None>
-    <None Include="Shaders\shadowPS.hlsl">
+    <None Include="Shaders\ShaderPS.hlsl">
       <FileType>Document</FileType>
     </None>
-    <None Include="Shaders\shadowVS.hlsl">
+    <None Include="Shaders\ShaderVS.hlsl">
       <FileType>Document</FileType>
     </None>
   </ItemGroup>

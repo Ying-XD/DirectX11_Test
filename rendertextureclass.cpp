@@ -365,3 +365,36 @@ void RenderTextureClass::EndRender(D3DClass * d3d) {
 	d3d->SetBackBufferRenderTarget();
 	d3d->ResetViewport();
 }
+
+bool RenderTextureClass::CreateRenderTexture(ID3D11Device * device, RenderTextureClass ** ppRenderTex, TextureType texType) {
+	bool result = true;
+	RenderTextureClass* renderTex = new RenderTextureClass;
+	if (!renderTex) return false;
+
+	renderTex->SetTextureType(texType);
+	switch (texType) {
+		case ScreenTexture:
+			result = renderTex->Initialize(device, SCREEN_WIDTH, SCREEN_HEIGHT);
+			break;
+		case ShadowTexture:
+			result = renderTex->Initialize(device, SHADOWMAP_WIDTH, SHADOWMAP_WIDTH);
+			break;
+		case WarpMapTexture:
+			result = renderTex->Initialize(device, SHADOWMAP_WIDTH, 2);
+			break;
+		case ScreenColorTexture:
+			result = renderTex->Initialize(device, SCREEN_WIDTH, SCREEN_HEIGHT, DXGI_FORMAT_R32G32B32A32_FLOAT);
+			break;
+		default:
+			result = renderTex->Initialize(device, SCREEN_WIDTH, SCREEN_HEIGHT);
+			break;
+	}
+	if (!result) {
+		Log::GetInstance()->LogMsg("Could not initialize the render to texture object.");
+		delete renderTex;
+	}
+	else {
+		*ppRenderTex = renderTex;
+	}
+	return result;
+}

@@ -96,7 +96,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device) {
 	unsigned long* indices = new unsigned long[m_indexCount];
 	if (!indices)	return false;
 
-	// 存储数据
+	// 存储数据	
 	for (size_t i = 0; i < m_vertexCount; i++) {
 		vertices[i].position = D3DXVECTOR3(m_model[i].x, m_model[i].y, m_model[i].z);		// position
 		vertices[i].texture = D3DXVECTOR2(m_model[i].tu, m_model[i].tv);					// texture
